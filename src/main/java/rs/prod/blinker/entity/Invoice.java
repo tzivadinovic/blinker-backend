@@ -19,6 +19,6 @@ public class Invoice extends Auditable {
 	private Integer id;
 	@JoinColumn(name = "invoice_detail_id", referencedColumnName = "invoice_detail_id")
 	@ManyToOne
-	private InvoiceDetails invoiceDetailId;
+	private InvoiceDetails invoiceDetail;
 	
 }

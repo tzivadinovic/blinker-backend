@@ -27,6 +27,12 @@ public class InvoiceController {
 		return ResponseEntity.ok(invoiceService.findById(invoiceId));
 	}
 
+	@GetMapping("/lastCreated")
+	@ApiOperation(value = "", nickname = "lastCreated")
+	public ResponseEntity<Invoice> findLastCreated(){
+		return ResponseEntity.ok(invoiceService.findLastCreated());
+	}
+
 	@PostMapping
 	@ApiOperation(value = "", nickname = "saveInvoice")
 	public ResponseEntity<Invoice> saveInvoice() {

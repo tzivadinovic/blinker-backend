@@ -19,8 +19,8 @@ public class Employee extends Auditable {
 	@Column(name = "employee_id")
 	private Integer id;
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
-	@ManyToOne
-	private User userId;
+	@OneToOne
+	private User user;
 	@Column(name = "first_name")
 	private String firstName;
 	@Column(name = "last_name")

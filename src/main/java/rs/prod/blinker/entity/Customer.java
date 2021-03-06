@@ -19,10 +19,10 @@ public class Customer extends Auditable {
 	private Integer id;
 	@JoinColumn(name = "state_id", referencedColumnName = "state_id")
 	@ManyToOne
-	private State stateId;
+	private State state;
 	@JoinColumn(name = "city_id", referencedColumnName = "city_id")
 	@ManyToOne
-	private City cityId;
+	private City city;
 	@Column(name = "name")
 	private String name;
 	

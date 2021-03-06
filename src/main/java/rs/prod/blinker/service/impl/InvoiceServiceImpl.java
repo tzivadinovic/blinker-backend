@@ -45,5 +45,11 @@ public class InvoiceServiceImpl implements InvoiceService {
 		invoiceRepository.deleteById(invoiceId);
 	}
 
+	@Override
+	public Invoice findLastCreated() {
+		return invoiceRepository.findTopByOrderByIdDesc()
+				.orElseThrow(() -> new NoSuchElementException("InvoiceService.lastCreatedInvoice.notFound"));
+	}
+
 
 }

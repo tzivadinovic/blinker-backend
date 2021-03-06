@@ -20,9 +20,6 @@ public class User extends Auditable implements UserDetails {
 	@EqualsAndHashCode.Include
 	@Column(name = "user_id")
 	private Integer id;
-	@JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
-	@ManyToOne
-	private Employee employeeId;
 	@Column(name = "username")
 	private String username;
 	@Column(name = "password")

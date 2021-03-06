@@ -20,19 +20,19 @@ public class InvoiceDetails extends Auditable {
 	private Integer id;
 	@JoinColumn(name = "transport_term_id", referencedColumnName = "transport_term_id")
 	@ManyToOne
-	private TransportTerm transportTermId;
+	private TransportTerm transportTerm;
 	@JoinColumn(name = "currency_id", referencedColumnName = "currency_id")
 	@ManyToOne
-	private Currency currencyId;
+	private Currency currency;
 	@JoinColumn(name = "employee_id", referencedColumnName = "employee_id")
 	@ManyToOne
-	private Employee employeeId;
+	private Employee employee;
 	@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
 	@ManyToOne
-	private Invoice invoiceId;
+	private Invoice invoice;
 	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
 	@ManyToOne
-	private Customer customerId;
+	private Customer customer;
 	@Column(name = "number")
 	private String number;
 	@Column(name = "date")

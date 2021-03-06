@@ -19,10 +19,10 @@ public class ProductInvoice extends Auditable {
 	private Integer id;
 	@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
 	@ManyToOne
-	private Invoice invoiceId;
+	private Invoice invoice;
 	@JoinColumn(name = "product_id", referencedColumnName = "product_id")
 	@ManyToOne
-	private Product productId;
+	private Product product;
 	@Column(name = "quantity")
 	private Integer quantity;
 	

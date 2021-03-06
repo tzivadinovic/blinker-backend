@@ -16,4 +16,6 @@ public interface InvoiceService {
 
 	void deleteById(Integer invoiceId);
 
+	Invoice findLastCreated();
+
 }
