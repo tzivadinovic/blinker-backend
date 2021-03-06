@@ -1,8 +1,8 @@
 package rs.prod.blinker.service;
 
-import java.util.Collection;
+import rs.prod.blinker.entity.InvoiceDetails;
+
 import java.util.List;
-import rs.prod.blinker.entity.*;
 
 public interface InvoiceDetailsService {
 

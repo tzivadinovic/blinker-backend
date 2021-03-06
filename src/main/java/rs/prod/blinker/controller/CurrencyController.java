@@ -1,12 +1,13 @@
 package rs.prod.blinker.controller;
 
-import java.util.List;
-import lombok.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.prod.blinker.entity.*;
-import rs.prod.blinker.service.*;
+import rs.prod.blinker.entity.Currency;
+import rs.prod.blinker.service.CurrencyService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/currencies")

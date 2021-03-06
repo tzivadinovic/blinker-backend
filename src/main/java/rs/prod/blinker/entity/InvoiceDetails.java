@@ -1,10 +1,11 @@
 package rs.prod.blinker.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.time.*;
-import java.util.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import lombok.*;
+import java.time.LocalDate;
 
 @Data
 @Entity

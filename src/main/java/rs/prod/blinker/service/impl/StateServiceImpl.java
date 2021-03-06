@@ -1,12 +1,15 @@
 package rs.prod.blinker.service.impl;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import rs.prod.blinker.entity.*;
+import rs.prod.blinker.entity.State;
 import rs.prod.blinker.repository.StateRepository;
 import rs.prod.blinker.service.StateService;
+
+import java.util.List;
+import java.util.NoSuchElementException;
 
 @Data
 @Service
