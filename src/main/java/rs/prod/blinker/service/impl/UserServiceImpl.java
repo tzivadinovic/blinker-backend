@@ -44,5 +44,10 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(userId);
 	}
 
+	@Override
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("UserService.user.notFound"));
+	}
+
 
 }

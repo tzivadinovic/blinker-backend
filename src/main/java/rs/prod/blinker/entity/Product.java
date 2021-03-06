@@ -19,7 +19,7 @@ public class Product extends Auditable {
 	private Integer id;
 	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
 	@ManyToOne
-	private Category categoryId;
+	private Category category;
 	@Column(name = "code")
 	private String code;
 	@Column(name = "name")

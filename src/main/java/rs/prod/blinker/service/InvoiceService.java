@@ -8,7 +8,7 @@ public interface InvoiceService {
 
 	List<Invoice> findAll();
 
-	Invoice save(Invoice invoice);
+	Invoice save();
 
 	Invoice update(Invoice invoice);
 

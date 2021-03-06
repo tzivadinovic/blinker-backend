@@ -29,8 +29,8 @@ public class InvoiceController {
 
 	@PostMapping
 	@ApiOperation(value = "", nickname = "saveInvoice")
-	public ResponseEntity<Invoice> saveInvoice(@RequestBody Invoice invoice) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceService.save(invoice));
+	public ResponseEntity<Invoice> saveInvoice() {
+		return ResponseEntity.status(HttpStatus.CREATED).body(invoiceService.save());
 	}
 
 	@PutMapping
