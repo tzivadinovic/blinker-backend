@@ -1,6 +1,9 @@
 package rs.prod.blinker.controller;
 
 import io.swagger.annotations.ApiOperation;
+
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import lombok.*;
 import org.springframework.http.HttpStatus;
@@ -17,7 +20,8 @@ public class ProductController {
 
 	@GetMapping
 	@ApiOperation(value = "", nickname = "getAllProducts")
-	public ResponseEntity<List<Product>> getAllProducts() {
+	public ResponseEntity<List<Product>> getAllProducts(@RequestParam(required = false) String code) {
+		if(code != null) return ResponseEntity.ok(Collections.singletonList(productService.findByCode(code)));
 		return ResponseEntity.ok(productService.findAll());
 	}
 
@@ -26,6 +30,7 @@ public class ProductController {
 	public ResponseEntity<Product> getProductById(@PathVariable Integer productId) {
 		return ResponseEntity.ok(productService.findById(productId));
 	}
+
 
 	@PostMapping
 	@ApiOperation(value = "", nickname = "saveProduct")

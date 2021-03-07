@@ -44,5 +44,10 @@ public class ProductServiceImpl implements ProductService {
 		productRepository.deleteById(productId);
 	}
 
+	@Override
+	public Product findByCode(String code) {
+		return productRepository.findByCode(code).orElseThrow(() -> new NoSuchElementException("ProductService.productByCode.notFound"));
+	}
+
 
 }

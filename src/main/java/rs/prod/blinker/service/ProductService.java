@@ -16,4 +16,6 @@ public interface ProductService {
 
 	void deleteById(Integer productId);
 
+	Product findByCode(String code);
+
 }

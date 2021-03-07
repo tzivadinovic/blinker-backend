@@ -55,5 +55,7 @@ public class InvoiceDetails extends Auditable {
 	private Double totalPrice;
 	@Column(name = "items_info")
 	private String itemsInfo;
+	@Column(name = "item_number")
+	private Integer itemNumber;
 	
 }

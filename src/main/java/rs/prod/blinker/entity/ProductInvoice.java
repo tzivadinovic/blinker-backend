@@ -25,5 +25,7 @@ public class ProductInvoice extends Auditable {
 	private Product product;
 	@Column(name = "quantity")
 	private Integer quantity;
+	@Column(name = "item_number")
+	private Integer itemNumber;
 	
 }
