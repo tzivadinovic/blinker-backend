@@ -1,5 +1,6 @@
 package rs.prod.blinker.service;
 
+import rs.prod.blinker.data.ResponseValue;
 import rs.prod.blinker.entity.Invoice;
 import rs.prod.blinker.entity.ProductInvoice;
 
@@ -22,6 +23,6 @@ public interface ProductInvoiceService {
 
     double getInvoiceTotalValue(Integer invoiceId);
 
-    Integer totalBoxes(Integer invoiceId);
+    ResponseValue<Integer> totalBoxes(Integer invoiceId);
 
 }

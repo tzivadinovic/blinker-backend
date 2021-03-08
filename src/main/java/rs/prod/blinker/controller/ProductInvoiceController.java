@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rs.prod.blinker.data.ResponseValue;
 import rs.prod.blinker.entity.ProductInvoice;
 import rs.prod.blinker.service.ProductInvoiceService;
 
@@ -60,7 +61,7 @@ public class ProductInvoiceController {
 
     @GetMapping("/invoice/totalBoxes/{invoiceId}")
     @ApiOperation(value = "", nickname = "totalBoxes")
-    public ResponseEntity<Integer> getTotalBoxes(@PathVariable Integer invoiceId) {
+    public ResponseEntity<ResponseValue<Integer>> getTotalBoxes(@PathVariable Integer invoiceId) {
         return ResponseEntity.ok(productInvoiceService.totalBoxes(invoiceId));
     }
 

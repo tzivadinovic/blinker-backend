@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import rs.prod.blinker.data.ResponseValue;
 import rs.prod.blinker.entity.Invoice;
 import rs.prod.blinker.entity.ProductInvoice;
 import rs.prod.blinker.repository.InvoiceRepository;
@@ -70,12 +71,12 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
     }
 
     @Override
-    public Integer totalBoxes(Integer invoiceId) {
+    public ResponseValue<Integer> totalBoxes(Integer invoiceId) {
         Set<Integer> uniqueBoxes = new HashSet<>();
         for (ProductInvoice productInvoice : productInvoiceRepository.findAllByInvoiceId(invoiceId)) {
             uniqueBoxes.add(productInvoice.getBoxNumber());
         }
-        return uniqueBoxes.size();
+        return ResponseValue.of(uniqueBoxes.size());
     }
 
 
