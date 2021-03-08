@@ -16,40 +16,45 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class InvoiceServiceImpl implements InvoiceService {
-	private final InvoiceRepository invoiceRepository;
+    private final InvoiceRepository invoiceRepository;
 
-	@Override
-	public List<Invoice> findAll() {
-		return invoiceRepository.findAll();
-	}
+    @Override
+    public List<Invoice> findAll() {
+        return invoiceRepository.findAll();
+    }
 
-	@Override
-	public Invoice findById(Integer invoiceId) {
-		return invoiceRepository.findById(invoiceId)
-				.orElseThrow(() -> new NoSuchElementException("InvoiceService.notFound"));
-	}
+    @Override
+    public Invoice findById(Integer invoiceId) {
+        return invoiceRepository.findById(invoiceId)
+                .orElseThrow(() -> new NoSuchElementException("InvoiceService.notFound"));
+    }
 
-	@Override
-	public Invoice save() {
-		Invoice invoice = new Invoice();
-		return invoiceRepository.save(invoice);
-	}
+    @Override
+    public Invoice save() {
+        Invoice invoice = new Invoice();
+        return invoiceRepository.save(invoice);
+    }
 
-	@Override
-	public Invoice update(Invoice invoice) {
-		return invoiceRepository.save(invoice);
-	}
+    @Override
+    public Invoice save(Invoice invoice) {
+        return invoiceRepository.save(invoice);
+    }
 
-	@Override
-	public void deleteById(Integer invoiceId) {
-		invoiceRepository.deleteById(invoiceId);
-	}
+    @Override
+    public Invoice update(Invoice invoice) {
+        return invoiceRepository.save(invoice);
+    }
 
-	@Override
-	public Invoice findLastCreated() {
-		return invoiceRepository.findTopByOrderByIdDesc()
-				.orElseThrow(() -> new NoSuchElementException("InvoiceService.lastCreatedInvoice.notFound"));
-	}
+    @Override
+    public void deleteById(Integer invoiceId) {
+        invoiceRepository.deleteById(invoiceId);
+    }
+
+    @Override
+    public Invoice findLastCreated() {
+        return invoiceRepository.findTopByOrderByIdDesc()
+                .orElseThrow(() -> new NoSuchElementException("InvoiceService.lastCreatedInvoice.notFound"));
+    }
 
 
 }

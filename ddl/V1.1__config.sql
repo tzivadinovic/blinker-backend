@@ -12,8 +12,7 @@ alter table employee add constraint fk_user_employee foreign key (user_id)
       references user (user_id);
 
 
-alter table invoice_details add constraint fk_invoice_details_invoice2 foreign key (invoice_id)
-      references invoice (invoice_id);
+
 alter table invoice_details add constraint fk_customer_invoice_details foreign key (customer_id)
       references customer (customer_id);
 alter table invoice_details add constraint fk_invoice_details_transport_term foreign key (transport_term_id)
@@ -25,7 +24,7 @@ alter table invoice_details add constraint fk_employee_invoice_details foreign k
 
 
 alter table invoice add constraint fk_invoice_details_invoice foreign key (invoice_detail_id)
-      references invoice_details (invoice_detail_id);
+      references invoice_details (invoice_detail_id) on update cascade on delete cascade;
 
 
 alter table product add constraint fk_category_product foreign key (category_id)

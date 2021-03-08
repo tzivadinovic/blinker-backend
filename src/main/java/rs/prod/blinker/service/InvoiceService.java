@@ -10,6 +10,8 @@ public interface InvoiceService {
 
 	Invoice save();
 
+	Invoice save(Invoice invoice);
+
 	Invoice update(Invoice invoice);
 
 	Invoice findById(Integer invoiceId);

@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+import static javax.persistence.CascadeType.*;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -18,7 +20,7 @@ public class Invoice extends Auditable {
 	@Column(name = "invoice_id")
 	private Integer id;
 	@JoinColumn(name = "invoice_detail_id", referencedColumnName = "invoice_detail_id")
-	@ManyToOne
+	@OneToOne(cascade = ALL)
 	private InvoiceDetails invoiceDetail;
 	
 }

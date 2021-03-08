@@ -9,6 +9,7 @@ import rs.prod.blinker.entity.InvoiceDetails;
 import rs.prod.blinker.repository.InvoiceDetailsRepository;
 import rs.prod.blinker.repository.InvoiceRepository;
 import rs.prod.blinker.service.InvoiceDetailsService;
+import rs.prod.blinker.service.InvoiceService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -19,7 +20,7 @@ import java.util.NoSuchElementException;
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     private final InvoiceDetailsRepository invoiceDetailsRepository;
-    private final InvoiceRepository invoiceRepository;
+    private final InvoiceService invoiceService;
 
     @Override
     public List<InvoiceDetails> findAll() {
@@ -34,13 +35,16 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 
     @Override
     public InvoiceDetails save(InvoiceDetails invoiceDetails) {
-        Invoice invoice = invoiceRepository.findTopByOrderByIdDesc()
-                .orElseThrow(() -> new NoSuchElementException("InvoiceDetailsService.lastCreatedInvoice.notFound"));
-        invoiceDetails.setInvoice(invoice);
-        invoiceDetailsRepository.save(invoiceDetails);
+        Invoice invoice;
+        if (invoiceDetails.getInvoice() == null) {
+            invoice = invoiceService.findLastCreated();
+        } else {
+            invoice = invoiceService.findById(invoiceDetails.getInvoice().getId());
+        }
         invoice.setInvoiceDetail(invoiceDetails);
-        invoiceRepository.save(invoice);
-        return invoiceDetails;
+        invoice.getInvoiceDetail().setDate(invoiceDetails.getDate().plusDays(1));
+        return invoiceService.save(invoice).getInvoiceDetail();
+
     }
 
     @Override
