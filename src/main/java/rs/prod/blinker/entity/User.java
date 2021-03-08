@@ -1,5 +1,6 @@
 package rs.prod.blinker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class User extends Auditable implements UserDetails {
 	@Column(name = "username")
 	private String username;
 	@Column(name = "password")
+	@JsonIgnore
 	private String password;
 
 	@Override

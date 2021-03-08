@@ -45,5 +45,11 @@ public class ProductInvoiceController {
 		productInvoiceService.deleteById(productInvoiceId);
 	}
 
+	@GetMapping("/invoice/{invoiceId}")
+	@ApiOperation(value = "", nickname = "findByInvoiceId")
+	public ResponseEntity<List<ProductInvoice>> findByInvoiceId(@PathVariable Integer invoiceId){
+		return ResponseEntity.ok(productInvoiceService.findByInvoiceId(invoiceId));
+	}
+
 }
 

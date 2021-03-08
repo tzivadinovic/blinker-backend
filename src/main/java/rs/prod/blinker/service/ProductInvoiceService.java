@@ -16,4 +16,6 @@ public interface ProductInvoiceService {
 
 	void deleteById(Integer productInvoiceId);
 
+	List<ProductInvoice> findByInvoiceId(Integer invoiceId);
+
 }

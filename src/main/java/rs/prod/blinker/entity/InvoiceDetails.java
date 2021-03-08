@@ -1,5 +1,6 @@
 package rs.prod.blinker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class InvoiceDetails extends Auditable {
 	private Employee employee;
 	@JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
 	@ManyToOne
+	@JsonIgnore
 	private Invoice invoice;
 	@JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
 	@ManyToOne
@@ -55,7 +57,5 @@ public class InvoiceDetails extends Auditable {
 	private Double totalPrice;
 	@Column(name = "items_info")
 	private String itemsInfo;
-	@Column(name = "item_number")
-	private Integer itemNumber;
 	
 }
