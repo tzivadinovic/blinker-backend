@@ -9,6 +9,7 @@ import rs.prod.blinker.entity.InvoiceDetails;
 import rs.prod.blinker.repository.InvoiceDetailsRepository;
 import rs.prod.blinker.service.InvoiceDetailsService;
 import rs.prod.blinker.service.InvoiceService;
+import rs.prod.blinker.service.ProductInvoiceService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -20,6 +21,7 @@ import java.util.NoSuchElementException;
 public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
     private final InvoiceDetailsRepository invoiceDetailsRepository;
     private final InvoiceService invoiceService;
+    private final ProductInvoiceService productInvoiceService;
 
     @Override
     public List<InvoiceDetails> findAll() {
@@ -42,6 +44,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
         }
         invoice.setInvoiceDetail(invoiceDetails);
         invoice.getInvoiceDetail().setDate(invoiceDetails.getDate().plusDays(1));
+//        invoice.getInvoiceDetail().setTotalPrice(productInvoiceService.getInvoiceTotalValue(invoice.getId()));
         return invoiceService.save(invoice).getInvoiceDetail();
 
     }

@@ -8,10 +8,13 @@ import rs.prod.blinker.entity.Invoice;
 import rs.prod.blinker.entity.ProductInvoice;
 import rs.prod.blinker.repository.InvoiceRepository;
 import rs.prod.blinker.repository.ProductInvoiceRepository;
+import rs.prod.blinker.repository.ProductRepository;
 import rs.prod.blinker.service.ProductInvoiceService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 @Data
 @Service
@@ -20,6 +23,7 @@ import java.util.NoSuchElementException;
 public class ProductInvoiceServiceImpl implements ProductInvoiceService {
     private final ProductInvoiceRepository productInvoiceRepository;
     private final InvoiceRepository invoiceRepository;
+    private final ProductRepository productRepository;
 
     @Override
     public List<ProductInvoice> findAll() {
@@ -37,6 +41,8 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
         Invoice invoice = invoiceRepository.findTopByOrderByIdDesc()
                 .orElseThrow(() -> new NoSuchElementException("ProductInvoiceService.invoice.notFound"));
         productInvoice.setInvoice(invoice);
+        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
+        productRepository.save(productInvoice.getProduct());
         return productInvoiceRepository.save(productInvoice);
     }
 
@@ -61,6 +67,15 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
                 .stream()
                 .mapToDouble(pr -> pr.getProduct().getPrice() * pr.getQuantity())
                 .sum();
+    }
+
+    @Override
+    public Integer totalBoxes(Integer invoiceId) {
+        Set<Integer> uniqueBoxes = new HashSet<>();
+        for (ProductInvoice productInvoice : productInvoiceRepository.findAllByInvoiceId(invoiceId)) {
+            uniqueBoxes.add(productInvoice.getBoxNumber());
+        }
+        return uniqueBoxes.size();
     }
 
 

@@ -29,6 +29,6 @@ public class Product extends Auditable {
     @Column(name = "price")
     private Double price;
     @Column(name = "stock")
-    private Double stock;
+    private Integer stock;
 
 }

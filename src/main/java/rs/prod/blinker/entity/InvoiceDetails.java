@@ -43,8 +43,6 @@ public class InvoiceDetails extends Auditable {
     private LocalDate date;
     @Column(name = "payment_conditions")
     private String paymentConditions;
-    @Column(name = "box_number")
-    private Integer boxNumber;
     @Column(name = "total_boxes")
     private Integer totalBoxes;
     @Column(name = "remarks")
