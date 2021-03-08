@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface InvoiceDetailsService {
 
-	List<InvoiceDetails> findAll();
+    List<InvoiceDetails> findAll();
 
-	InvoiceDetails save(InvoiceDetails invoiceDetails);
+    InvoiceDetails save(InvoiceDetails invoiceDetails);
 
-	InvoiceDetails update(InvoiceDetails invoiceDetails);
+    InvoiceDetails update(InvoiceDetails invoiceDetails);
 
-	InvoiceDetails findById(Integer invoiceDetailId);
+    InvoiceDetails findById(Integer invoiceDetailId);
 
-	void deleteById(Integer invoiceDetailId);
+    void deleteById(Integer invoiceDetailId);
 
 }

@@ -21,12 +21,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Auditable implements Serializable {
 
-	@CreatedDate
-	private LocalDateTime createdDate;
-	@LastModifiedDate
-	private LocalDateTime lastModifiedDate;
-	@LastModifiedBy
-	private String lastModifiedBy;
-	private Integer recordStatus = 1;
+    @CreatedDate
+    private LocalDateTime createdDate;
+    @LastModifiedDate
+    private LocalDateTime lastModifiedDate;
+    @LastModifiedBy
+    private String lastModifiedBy;
+    private Integer recordStatus = 1;
 
 }

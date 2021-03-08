@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface CustomerService {
 
-	List<Customer> findAll();
+    List<Customer> findAll();
 
-	Customer save(Customer customer);
+    Customer save(Customer customer);
 
-	Customer update(Customer customer);
+    Customer update(Customer customer);
 
-	Customer findById(Integer customerId);
+    Customer findById(Integer customerId);
 
-	void deleteById(Integer customerId);
+    void deleteById(Integer customerId);
 
 }

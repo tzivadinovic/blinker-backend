@@ -16,39 +16,39 @@ import java.util.Collection;
 @Table(name = "user")
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class User extends Auditable implements UserDetails {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
-	@Column(name = "user_id")
-	private Integer id;
-	@Column(name = "username")
-	private String username;
-	@Column(name = "password")
-	@JsonIgnore
-	private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @Column(name = "user_id")
+    private Integer id;
+    @Column(name = "username")
+    private String username;
+    @Column(name = "password")
+    @JsonIgnore
+    private String password;
 
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
-	}
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
 
-	@Override
-	public boolean isAccountNonExpired() {
-		return false;
-	}
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
 
-	@Override
-	public boolean isAccountNonLocked() {
-		return false;
-	}
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
 
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return false;
-	}
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
 
-	@Override
-	public boolean isEnabled() {
-		return false;
-	}
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

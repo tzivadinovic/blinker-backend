@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import rs.prod.blinker.entity.Invoice;
 import rs.prod.blinker.entity.InvoiceDetails;
 import rs.prod.blinker.repository.InvoiceDetailsRepository;
-import rs.prod.blinker.repository.InvoiceRepository;
 import rs.prod.blinker.service.InvoiceDetailsService;
 import rs.prod.blinker.service.InvoiceService;
 

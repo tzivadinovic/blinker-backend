@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface TransportTermService {
 
-	List<TransportTerm> findAll();
+    List<TransportTerm> findAll();
 
-	TransportTerm save(TransportTerm transportTerm);
+    TransportTerm save(TransportTerm transportTerm);
 
-	TransportTerm update(TransportTerm transportTerm);
+    TransportTerm update(TransportTerm transportTerm);
 
-	TransportTerm findById(Integer transportTermId);
+    TransportTerm findById(Integer transportTermId);
 
-	void deleteById(Integer transportTermId);
+    void deleteById(Integer transportTermId);
 
 }

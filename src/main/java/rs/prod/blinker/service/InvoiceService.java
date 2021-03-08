@@ -6,18 +6,18 @@ import java.util.List;
 
 public interface InvoiceService {
 
-	List<Invoice> findAll();
+    List<Invoice> findAll();
 
-	Invoice save();
+    Invoice save();
 
-	Invoice save(Invoice invoice);
+    Invoice save(Invoice invoice);
 
-	Invoice update(Invoice invoice);
+    Invoice update(Invoice invoice);
 
-	Invoice findById(Integer invoiceId);
+    Invoice findById(Integer invoiceId);
 
-	void deleteById(Integer invoiceId);
+    void deleteById(Integer invoiceId);
 
-	Invoice findLastCreated();
+    Invoice findLastCreated();
 
 }

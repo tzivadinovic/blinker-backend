@@ -12,12 +12,12 @@ import javax.persistence.*;
 @Table(name = "state")
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class State extends Auditable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
-	@Column(name = "state_id")
-	private Integer id;
-	@Column(name = "name")
-	private String name;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @Column(name = "state_id")
+    private Integer id;
+    @Column(name = "name")
+    private String name;
+
 }

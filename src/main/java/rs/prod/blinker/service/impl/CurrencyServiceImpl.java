@@ -16,33 +16,33 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class CurrencyServiceImpl implements CurrencyService {
-	private final CurrencyRepository currencyRepository;
+    private final CurrencyRepository currencyRepository;
 
-	@Override
-	public List<Currency> findAll() {
-		return currencyRepository.findAll();
-	}
+    @Override
+    public List<Currency> findAll() {
+        return currencyRepository.findAll();
+    }
 
-	@Override
-	public Currency findById(Integer currencyId) {
-		return currencyRepository.findById(currencyId)
-				.orElseThrow(() -> new NoSuchElementException("CurrencyService.notFound"));
-	}
+    @Override
+    public Currency findById(Integer currencyId) {
+        return currencyRepository.findById(currencyId)
+                .orElseThrow(() -> new NoSuchElementException("CurrencyService.notFound"));
+    }
 
-	@Override
-	public Currency save(Currency currency) {
-		return currencyRepository.save(currency);
-	}
+    @Override
+    public Currency save(Currency currency) {
+        return currencyRepository.save(currency);
+    }
 
-	@Override
-	public Currency update(Currency currency) {
-		return currencyRepository.save(currency);
-	}
+    @Override
+    public Currency update(Currency currency) {
+        return currencyRepository.save(currency);
+    }
 
-	@Override
-	public void deleteById(Integer currencyId) {
-		currencyRepository.deleteById(currencyId);
-	}
+    @Override
+    public void deleteById(Integer currencyId) {
+        currencyRepository.deleteById(currencyId);
+    }
 
 
 }

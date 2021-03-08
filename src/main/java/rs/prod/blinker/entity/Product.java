@@ -12,23 +12,23 @@ import javax.persistence.*;
 @Table(name = "product")
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class Product extends Auditable {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@EqualsAndHashCode.Include
-	@Column(name = "product_id")
-	private Integer id;
-	@JoinColumn(name = "category_id", referencedColumnName = "category_id")
-	@ManyToOne
-	private Category category;
-	@Column(name = "code")
-	private String code;
-	@Column(name = "name")
-	private String name;
-	@Column(name = "description")
-	private String description;
-	@Column(name = "price")
-	private Double price;
-	@Column(name = "stock")
-	private Double stock;
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @Column(name = "product_id")
+    private Integer id;
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
+    @ManyToOne
+    private Category category;
+    @Column(name = "code")
+    private String code;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "description")
+    private String description;
+    @Column(name = "price")
+    private Double price;
+    @Column(name = "stock")
+    private Double stock;
+
 }

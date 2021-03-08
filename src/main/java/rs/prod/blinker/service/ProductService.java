@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface ProductService {
 
-	List<Product> findAll();
+    List<Product> findAll();
 
-	Product save(Product product);
+    Product save(Product product);
 
-	Product update(Product product);
+    Product update(Product product);
 
-	Product findById(Integer productId);
+    Product findById(Integer productId);
 
-	void deleteById(Integer productId);
+    void deleteById(Integer productId);
 
-	Product findByCode(String code);
+    Product findByCode(String code);
 
 }

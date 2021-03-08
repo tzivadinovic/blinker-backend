@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface StateService {
 
-	List<State> findAll();
+    List<State> findAll();
 
-	State save(State state);
+    State save(State state);
 
-	State update(State state);
+    State update(State state);
 
-	State findById(Integer stateId);
+    State findById(Integer stateId);
 
-	void deleteById(Integer stateId);
+    void deleteById(Integer stateId);
 
 }

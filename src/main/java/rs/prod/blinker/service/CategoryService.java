@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface CategoryService {
 
-	List<Category> findAll();
+    List<Category> findAll();
 
-	Category save(Category category);
+    Category save(Category category);
 
-	Category update(Category category);
+    Category update(Category category);
 
-	Category findById(Integer categoryId);
+    Category findById(Integer categoryId);
 
-	void deleteById(Integer categoryId);
+    void deleteById(Integer categoryId);
 
 }

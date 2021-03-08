@@ -16,33 +16,33 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class TransportTermServiceImpl implements TransportTermService {
-	private final TransportTermRepository transportTermRepository;
+    private final TransportTermRepository transportTermRepository;
 
-	@Override
-	public List<TransportTerm> findAll() {
-		return transportTermRepository.findAll();
-	}
+    @Override
+    public List<TransportTerm> findAll() {
+        return transportTermRepository.findAll();
+    }
 
-	@Override
-	public TransportTerm findById(Integer transportTermId) {
-		return transportTermRepository.findById(transportTermId)
-				.orElseThrow(() -> new NoSuchElementException("TransportTermService.notFound"));
-	}
+    @Override
+    public TransportTerm findById(Integer transportTermId) {
+        return transportTermRepository.findById(transportTermId)
+                .orElseThrow(() -> new NoSuchElementException("TransportTermService.notFound"));
+    }
 
-	@Override
-	public TransportTerm save(TransportTerm transportTerm) {
-		return transportTermRepository.save(transportTerm);
-	}
+    @Override
+    public TransportTerm save(TransportTerm transportTerm) {
+        return transportTermRepository.save(transportTerm);
+    }
 
-	@Override
-	public TransportTerm update(TransportTerm transportTerm) {
-		return transportTermRepository.save(transportTerm);
-	}
+    @Override
+    public TransportTerm update(TransportTerm transportTerm) {
+        return transportTermRepository.save(transportTerm);
+    }
 
-	@Override
-	public void deleteById(Integer transportTermId) {
-		transportTermRepository.deleteById(transportTermId);
-	}
+    @Override
+    public void deleteById(Integer transportTermId) {
+        transportTermRepository.deleteById(transportTermId);
+    }
 
 
 }

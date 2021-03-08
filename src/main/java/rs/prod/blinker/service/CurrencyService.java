@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface CurrencyService {
 
-	List<Currency> findAll();
+    List<Currency> findAll();
 
-	Currency save(Currency currency);
+    Currency save(Currency currency);
 
-	Currency update(Currency currency);
+    Currency update(Currency currency);
 
-	Currency findById(Integer currencyId);
+    Currency findById(Integer currencyId);
 
-	void deleteById(Integer currencyId);
+    void deleteById(Integer currencyId);
 
 }

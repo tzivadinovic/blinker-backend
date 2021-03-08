@@ -6,14 +6,14 @@ import java.util.List;
 
 public interface CityService {
 
-	List<City> findAll();
+    List<City> findAll();
 
-	City save(City city);
+    City save(City city);
 
-	City update(City city);
+    City update(City city);
 
-	City findById(Integer cityId);
+    City findById(Integer cityId);
 
-	void deleteById(Integer cityId);
+    void deleteById(Integer cityId);
 
 }

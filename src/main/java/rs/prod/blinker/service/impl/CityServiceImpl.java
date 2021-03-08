@@ -16,33 +16,33 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class CityServiceImpl implements CityService {
-	private final CityRepository cityRepository;
+    private final CityRepository cityRepository;
 
-	@Override
-	public List<City> findAll() {
-		return cityRepository.findAll();
-	}
+    @Override
+    public List<City> findAll() {
+        return cityRepository.findAll();
+    }
 
-	@Override
-	public City findById(Integer cityId) {
-		return cityRepository.findById(cityId)
-				.orElseThrow(() -> new NoSuchElementException("CityService.notFound"));
-	}
+    @Override
+    public City findById(Integer cityId) {
+        return cityRepository.findById(cityId)
+                .orElseThrow(() -> new NoSuchElementException("CityService.notFound"));
+    }
 
-	@Override
-	public City save(City city) {
-		return cityRepository.save(city);
-	}
+    @Override
+    public City save(City city) {
+        return cityRepository.save(city);
+    }
 
-	@Override
-	public City update(City city) {
-		return cityRepository.save(city);
-	}
+    @Override
+    public City update(City city) {
+        return cityRepository.save(city);
+    }
 
-	@Override
-	public void deleteById(Integer cityId) {
-		cityRepository.deleteById(cityId);
-	}
+    @Override
+    public void deleteById(Integer cityId) {
+        cityRepository.deleteById(cityId);
+    }
 
 
 }

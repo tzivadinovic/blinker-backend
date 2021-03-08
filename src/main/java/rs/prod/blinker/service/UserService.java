@@ -6,16 +6,16 @@ import java.util.List;
 
 public interface UserService {
 
-	List<User> findAll();
+    List<User> findAll();
 
-	User save(User user);
+    User save(User user);
 
-	User update(User user);
+    User update(User user);
 
-	User findById(Integer userId);
+    User findById(Integer userId);
 
-	void deleteById(Integer userId);
+    void deleteById(Integer userId);
 
-	User findByUsername(String username);
+    User findByUsername(String username);
 
 }
