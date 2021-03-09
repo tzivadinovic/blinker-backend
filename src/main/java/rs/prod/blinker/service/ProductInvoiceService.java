@@ -23,6 +23,6 @@ public interface ProductInvoiceService {
 
     double getInvoiceTotalValue(Integer invoiceId);
 
-    ResponseValue<Integer> totalBoxes(Integer invoiceId);
+    Integer totalBoxes(Integer invoiceId);
 
 }

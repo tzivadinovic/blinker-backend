@@ -62,7 +62,7 @@ public class ProductInvoiceController {
     @GetMapping("/invoice/totalBoxes/{invoiceId}")
     @ApiOperation(value = "", nickname = "totalBoxes")
     public ResponseEntity<ResponseValue<Integer>> getTotalBoxes(@PathVariable Integer invoiceId) {
-        return ResponseEntity.ok(productInvoiceService.totalBoxes(invoiceId));
+        return ResponseEntity.ok(ResponseValue.of(productInvoiceService.totalBoxes(invoiceId)));
     }
 
 }

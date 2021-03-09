@@ -1,8 +1,12 @@
 package rs.prod.blinker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -18,7 +22,10 @@ public class ProductInvoice extends Auditable {
     @Column(name = "product_invoice_id")
     private Integer id;
     @JoinColumn(name = "invoice_id", referencedColumnName = "invoice_id")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference
+    @ToString.Exclude
     private Invoice invoice;
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     @ManyToOne

@@ -1,5 +1,6 @@
 package rs.prod.blinker.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,11 +23,15 @@ import java.time.LocalDateTime;
 public abstract class Auditable implements Serializable {
 
     @CreatedDate
+    @JsonIgnore
     private LocalDateTime createdDate;
     @LastModifiedDate
+    @JsonIgnore
     private LocalDateTime lastModifiedDate;
     @LastModifiedBy
+    @JsonIgnore
     private String lastModifiedBy;
+    @JsonIgnore
     private Integer recordStatus = 1;
 
 }

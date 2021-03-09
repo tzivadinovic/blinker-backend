@@ -4,12 +4,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import rs.prod.blinker.data.ResponseValue;
 import rs.prod.blinker.entity.Invoice;
+import rs.prod.blinker.entity.InvoiceDetails;
 import rs.prod.blinker.entity.ProductInvoice;
+import rs.prod.blinker.repository.InvoiceDetailsRepository;
 import rs.prod.blinker.repository.InvoiceRepository;
 import rs.prod.blinker.repository.ProductInvoiceRepository;
 import rs.prod.blinker.repository.ProductRepository;
+import rs.prod.blinker.service.InvoiceService;
 import rs.prod.blinker.service.ProductInvoiceService;
 
 import java.util.HashSet;
@@ -25,6 +27,8 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
     private final ProductInvoiceRepository productInvoiceRepository;
     private final InvoiceRepository invoiceRepository;
     private final ProductRepository productRepository;
+    private final InvoiceService invoiceService;
+    private final InvoiceDetailsRepository invoiceDetailsRepository;
 
     @Override
     public List<ProductInvoice> findAll() {
@@ -41,14 +45,25 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
     public ProductInvoice save(ProductInvoice productInvoice) {
         Invoice invoice = invoiceRepository.findTopByOrderByIdDesc()
                 .orElseThrow(() -> new NoSuchElementException("ProductInvoiceService.invoice.notFound"));
+        InvoiceDetails invoiceDetails = invoice.getInvoiceDetail();
         productInvoice.setInvoice(invoice);
         productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
         productRepository.save(productInvoice.getProduct());
+        double newValue = getInvoiceTotalValue(invoice.getId());
+        newValue += productInvoice.getProduct().getPrice() * productInvoice.getQuantity();
+        invoiceDetails.setTotalPrice(newValue);
+        invoiceDetails.setTotalBoxes(totalBoxes(invoice.getId()));
+        invoiceDetailsRepository.save(invoiceDetails);
         return productInvoiceRepository.save(productInvoice);
     }
 
     @Override
     public ProductInvoice update(ProductInvoice productInvoice) {
+        Invoice invoice = invoiceRepository.findById(productInvoice.getInvoice().getId())
+                .orElseThrow(() -> new NoSuchElementException("ProductInvoiceService.invoice.notFound"));
+        productInvoice.setInvoice(invoice);
+        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
+        productRepository.save(productInvoice.getProduct());
         return productInvoiceRepository.save(productInvoice);
     }
 
@@ -71,12 +86,12 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
     }
 
     @Override
-    public ResponseValue<Integer> totalBoxes(Integer invoiceId) {
+    public Integer totalBoxes(Integer invoiceId) {
         Set<Integer> uniqueBoxes = new HashSet<>();
         for (ProductInvoice productInvoice : productInvoiceRepository.findAllByInvoiceId(invoiceId)) {
             uniqueBoxes.add(productInvoice.getBoxNumber());
         }
-        return ResponseValue.of(uniqueBoxes.size());
+        return uniqueBoxes.size();
     }
 
 
