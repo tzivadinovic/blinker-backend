@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import rs.prod.blinker.entity.Product;
+import rs.prod.blinker.exception.ProductByCodeNotFoundException;
 import rs.prod.blinker.repository.ProductRepository;
 import rs.prod.blinker.service.ProductService;
 
@@ -46,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findByCode(String code) {
-        return productRepository.findByCode(code).orElseThrow(() -> new NoSuchElementException("ProductService.productByCode.notFound"));
+        return productRepository.findByCode(code).orElseThrow(ProductByCodeNotFoundException::new);
     }
 
 

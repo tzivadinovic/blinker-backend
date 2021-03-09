@@ -49,5 +49,11 @@ public class ProductController {
         productService.deleteById(productId);
     }
 
+    @GetMapping("/code")
+    @ApiOperation(value = "", nickname = "findByCode")
+    public ResponseEntity<Product> findProductByCode(@RequestParam String code) {
+        return ResponseEntity.ok(productService.findByCode(code));
+    }
+
 }
 
