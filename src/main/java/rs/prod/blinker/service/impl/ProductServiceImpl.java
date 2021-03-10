@@ -3,9 +3,11 @@ package rs.prod.blinker.service.impl;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import rs.prod.blinker.entity.Product;
 import rs.prod.blinker.exception.ProductByCodeNotFoundException;
+import rs.prod.blinker.exception.ProductInUseException;
 import rs.prod.blinker.repository.ProductRepository;
 import rs.prod.blinker.service.ProductService;
 
@@ -42,7 +44,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteById(Integer productId) {
-        productRepository.deleteById(productId);
+        try {
+            productRepository.deleteById(productId);
+        } catch (DataIntegrityViolationException ex) {
+            throw new ProductInUseException();
+        }
     }
 
     @Override

@@ -59,5 +59,12 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
         invoiceDetailsRepository.deleteById(invoiceDetailId);
     }
 
+    @Override
+    public InvoiceDetails setTotalItems(Integer invoiceDetailId) {
+        InvoiceDetails invoiceDetails = findById(invoiceDetailId);
+        invoiceDetails.setItemsInfo(invoiceDetails.getItemsInfo());
+        return invoiceDetailsRepository.save(invoiceDetails);
+    }
+
 
 }

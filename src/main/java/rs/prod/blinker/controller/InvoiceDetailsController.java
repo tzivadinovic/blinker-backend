@@ -40,6 +40,12 @@ public class InvoiceDetailsController {
         return ResponseEntity.ok(invoiceDetailsService.update(invoiceDetails));
     }
 
+    @PutMapping("/{invoiceDetailId}/setItemsInfo")
+    @ApiOperation(value = "", nickname = "setItemsInfo")
+    public ResponseEntity<InvoiceDetails> setItemsInfo(@PathVariable Integer invoiceDetailId) {
+        return ResponseEntity.ok(invoiceDetailsService.setTotalItems(invoiceDetailId));
+    }
+
     @DeleteMapping("/{invoiceDetailId}")
     @ApiOperation(value = "", nickname = "deleteInvoiceDetailsById")
     public void deleteInvoiceDetailsById(@PathVariable Integer invoiceDetailId) {

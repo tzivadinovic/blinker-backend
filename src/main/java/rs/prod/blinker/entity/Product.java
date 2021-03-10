@@ -26,6 +26,8 @@ public class Product extends Auditable {
     private String name;
     @Column(name = "description")
     private String description;
+    @Column(name = "unit")
+    private String unit;
     @Column(name = "price")
     private Double price;
     @Column(name = "stock")

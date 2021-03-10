@@ -16,4 +16,7 @@ public interface InvoiceDetailsService {
 
     void deleteById(Integer invoiceDetailId);
 
+    InvoiceDetails setTotalItems(Integer invoiceDetailId);
+
+
 }

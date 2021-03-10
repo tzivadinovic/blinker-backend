@@ -47,7 +47,7 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
                 .orElseThrow(() -> new NoSuchElementException("ProductInvoiceService.invoice.notFound"));
         InvoiceDetails invoiceDetails = invoice.getInvoiceDetail();
         productInvoice.setInvoice(invoice);
-        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
+//        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
         productRepository.save(productInvoice.getProduct());
         double newValue = getInvoiceTotalValue(invoice.getId());
         newValue += productInvoice.getProduct().getPrice() * productInvoice.getQuantity();
@@ -62,7 +62,7 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
         Invoice invoice = invoiceRepository.findById(productInvoice.getInvoice().getId())
                 .orElseThrow(() -> new NoSuchElementException("ProductInvoiceService.invoice.notFound"));
         productInvoice.setInvoice(invoice);
-        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
+//        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
         productRepository.save(productInvoice.getProduct());
         return productInvoiceRepository.save(productInvoice);
     }
@@ -93,6 +93,8 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
         }
         return uniqueBoxes.size();
     }
+
+
 
 
 }
