@@ -28,60 +28,60 @@ import java.util.Collections;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-	private final JwtProvider jwtProvider;
-	private final UserRepository userRepository;
-	private final Environment env;
+    private final JwtProvider jwtProvider;
+    private final UserRepository userRepository;
+    private final Environment env;
 
-	@Value("${spring.security.disabled:false}")
-	private String securityDisabled;
+    @Value("${spring.security.disabled:false}")
+    private String securityDisabled;
 
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		if (Boolean.parseBoolean(securityDisabled) || Arrays.asList(env.getActiveProfiles()).contains("dev")) {
-			http.httpBasic().disable().cors().and()
-					.csrf().disable()
-					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-					.and()
-					.authorizeRequests()
-					.antMatchers("/**").permitAll().and()
-					.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider))
-					.addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
-		} else {
-			http.httpBasic().disable()
-					.cors()
-					.and()
-					.csrf().disable()
-					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-					.and()
-					.authorizeRequests()
-					.antMatchers(HttpMethod.POST, "/login").permitAll()
-					.anyRequest().permitAll()
-					.and()
-					.addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider))
-					.addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
-		}
-	}
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        if (Boolean.parseBoolean(securityDisabled) || Arrays.asList(env.getActiveProfiles()).contains("dev")) {
+            http.httpBasic().disable().cors().and()
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers("/**").permitAll().and()
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider))
+                    .addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+        } else {
+            http.httpBasic().disable()
+                    .cors()
+                    .and()
+                    .csrf().disable()
+                    .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                    .and()
+                    .authorizeRequests()
+                    .antMatchers(HttpMethod.POST, "/login").permitAll()
+                    .anyRequest().permitAll()
+                    .and()
+                    .addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtProvider))
+                    .addFilterBefore(new JwtAuthorizationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+        }
+    }
 
-	@Bean
-	@Override
-	public AuthenticationManager authenticationManager() {
-		return new AuthenticationManagerImpl(passwordEncoder(), userRepository, env);
-	}
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManager() {
+        return new AuthenticationManagerImpl(passwordEncoder(), userRepository, env);
+    }
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-	@Bean
-	public CorsConfigurationSource corsConfigurationSource() {
-		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Collections.singletonList("*"));
-		configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-		configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Authorization", "content-type", "x-xsrf-token", "XSRF-TOKEN"));
-		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-		source.registerCorsConfiguration("/**", configuration);
-		return source;
-	}
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin", "Authorization", "content-type", "x-xsrf-token", "XSRF-TOKEN"));
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
 }

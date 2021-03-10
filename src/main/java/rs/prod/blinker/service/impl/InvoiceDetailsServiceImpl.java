@@ -11,6 +11,7 @@ import rs.prod.blinker.service.InvoiceDetailsService;
 import rs.prod.blinker.service.InvoiceService;
 import rs.prod.blinker.service.ProductInvoiceService;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -43,7 +44,9 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
             invoice = invoiceService.findById(invoiceDetails.getInvoice().getId());
         }
         invoice.setInvoiceDetail(invoiceDetails);
-        invoice.getInvoiceDetail().setDate(invoiceDetails.getDate().plusDays(1));
+        if (!invoiceDetails.getDate().equals(invoice.getInvoiceDetail().getDate())) {
+            invoice.getInvoiceDetail().setDate(invoiceDetails.getDate().plusDays(1));
+        }
 //        invoice.getInvoiceDetail().setTotalPrice(productInvoiceService.getInvoiceTotalValue(invoice.getId()));
         return invoiceService.save(invoice).getInvoiceDetail();
 

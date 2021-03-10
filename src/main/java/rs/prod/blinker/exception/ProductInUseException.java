@@ -6,5 +6,5 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @NoArgsConstructor
 @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Unable to delete! The product is in use")
-public class ProductInUseException extends RuntimeException{
+public class ProductInUseException extends RuntimeException {
 }

@@ -22,30 +22,30 @@ import java.util.ArrayList;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-	private final AuthenticationManager authenticationManager;
-	private final JwtProvider jwtProvider;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
 
-	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-		User user = ObjectMapperUtils.readValue(request, User.class);
-		if (user == null) throw new UsernameNotFoundException("Invalid username or password");
-		return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
-	}
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        User user = ObjectMapperUtils.readValue(request, User.class);
+        if (user == null) throw new UsernameNotFoundException("Invalid username or password");
+        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), new ArrayList<>()));
+    }
 
-	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
-		String token = jwtProvider.createToken(authResult.getName(), authResult.getAuthorities());
-		response.setContentType(MediaType.TEXT_PLAIN.toString());
-		response.getWriter().write(token);
-	}
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        String token = jwtProvider.createToken(authResult.getName(), authResult.getAuthorities());
+        response.setContentType(MediaType.TEXT_PLAIN.toString());
+        response.getWriter().write(token);
+    }
 
-	@Override
-	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-		String message = failed.getMessage() == null ? "Unauthorized" : failed.getMessage();
-		response.setStatus(HttpStatus.UNAUTHORIZED.value());
-		response.setContentType(MediaType.TEXT_PLAIN.toString());
-		response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-		response.getWriter().write(message);
-	}
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        String message = failed.getMessage() == null ? "Unauthorized" : failed.getMessage();
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        response.setContentType(MediaType.TEXT_PLAIN.toString());
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.getWriter().write(message);
+    }
 
 }

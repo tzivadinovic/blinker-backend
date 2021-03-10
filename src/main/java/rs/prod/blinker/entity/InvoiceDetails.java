@@ -2,7 +2,6 @@ package rs.prod.blinker.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -58,6 +57,8 @@ public class InvoiceDetails extends Auditable {
     private Double totalPrice;
     @Column(name = "items_info")
     private String itemsInfo;
+    @Column(name = "boxes_info")
+    private String boxesInfo;
     @Column(name = "attn")
     private String attn;
 

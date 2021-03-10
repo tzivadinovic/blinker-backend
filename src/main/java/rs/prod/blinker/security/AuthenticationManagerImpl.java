@@ -1,7 +1,6 @@
 package rs.prod.blinker.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
@@ -16,44 +15,43 @@ import org.springframework.stereotype.Component;
 import rs.prod.blinker.entity.User;
 import rs.prod.blinker.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
 @Primary
 public class AuthenticationManagerImpl implements AuthenticationManager {
-	private final PasswordEncoder passwordEncoder;
-	private final UserRepository userRepository;
-	private final Environment env;
+    private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final Environment env;
 
-	@Value("${spring.security.disabled:false}")
-	private String securityDisabled;
+    @Value("${spring.security.disabled:false}")
+    private String securityDisabled;
 
-	@Override
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-		String username = authentication.getName();
-		User user = userRepository.findByUsername(username)
-				.orElseThrow(() -> new BadCredentialsException("Invalid username or password"));
-		String password = username + "123";
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String username = authentication.getName();
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new BadCredentialsException("Invalid username or password"));
+        String password = username + "123";
 
 
-		if (!user.isEnabled())
-			throw new DisabledException("Account disabled");
+        if (!user.isEnabled())
+            throw new DisabledException("Account disabled");
 
-		// dev authentication override
-		if (Boolean.parseBoolean(securityDisabled) || Arrays.asList(env.getActiveProfiles()).contains("dev")) {
-			return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
-		}
+        // dev authentication override
+        if (Boolean.parseBoolean(securityDisabled) || Arrays.asList(env.getActiveProfiles()).contains("dev")) {
+            return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+        }
 
-		if (user.getPassword() == null) {
-			user.setPassword(passwordEncoder.encode(password));
-			userRepository.save(user);
-		}
+        if (user.getPassword() == null) {
+            user.setPassword(passwordEncoder.encode(password));
+            userRepository.save(user);
+        }
 
-		if (!passwordEncoder.matches(password, user.getPassword()))
-			throw new BadCredentialsException("Invalid username or password");
+        if (!passwordEncoder.matches(password, user.getPassword()))
+            throw new BadCredentialsException("Invalid username or password");
 
-		return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
-	}
+        return new UsernamePasswordAuthenticationToken(username, password, user.getAuthorities());
+    }
 }

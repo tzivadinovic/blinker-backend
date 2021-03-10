@@ -1,12 +1,8 @@
 package rs.prod.blinker.service;
 
-import rs.prod.blinker.data.ResponseValue;
-import rs.prod.blinker.entity.Invoice;
-import rs.prod.blinker.entity.InvoiceDetails;
 import rs.prod.blinker.entity.ProductInvoice;
 
 import java.util.List;
-import java.util.Set;
 
 public interface ProductInvoiceService {
 
