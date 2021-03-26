@@ -31,9 +31,9 @@ public class AuthenticationManagerImpl implements AuthenticationManager {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
+        String password = authentication.getCredentials().toString();
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new BadCredentialsException("Invalid username or password"));
-        String password = username + "123";
 
 
         if (!user.isEnabled())

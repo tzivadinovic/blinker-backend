@@ -20,4 +20,8 @@ public interface InvoiceService {
 
     Invoice findLastCreated();
 
+    double getInvoiceTotalValue(Integer invoiceId);
+
+    void updateTotalPrice();
+
 }
