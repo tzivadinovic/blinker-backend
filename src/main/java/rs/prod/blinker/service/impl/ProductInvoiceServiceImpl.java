@@ -48,7 +48,7 @@ public class ProductInvoiceServiceImpl implements ProductInvoiceService {
         InvoiceDetails invoiceDetails = invoice.getInvoiceDetail();
         productInvoice.setInvoice(invoice);
 //        productInvoice.getProduct().setStock(productInvoice.getProduct().getStock() - productInvoice.getQuantity());
-        productRepository.save(productInvoice.getProduct());
+//        productRepository.save(productInvoice.getProduct());
         double newValue = getInvoiceTotalValue(invoice.getId());
         newValue += productInvoice.getProduct().getPrice() * productInvoice.getQuantity();
         invoiceDetails.setTotalPrice(newValue);

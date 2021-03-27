@@ -11,7 +11,6 @@ import rs.prod.blinker.service.InvoiceDetailsService;
 import rs.prod.blinker.service.InvoiceService;
 import rs.prod.blinker.service.ProductInvoiceService;
 
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -44,11 +43,15 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
             invoice = invoiceService.findById(invoiceDetails.getInvoice().getId());
         }
         invoice.setInvoiceDetail(invoiceDetails);
-        if (!invoiceDetails.getDate().equals(invoice.getInvoiceDetail().getDate())) {
+        //TODO fix date because it sets minus one day
+        if (invoiceDetails.getDate() != (invoice.getInvoiceDetail().getDate().plusDays(1))) {
+            invoice.getInvoiceDetail().setDate(invoice.getInvoiceDetail().getDate());
+        } else {
             invoice.getInvoiceDetail().setDate(invoiceDetails.getDate().plusDays(1));
         }
 //        invoice.getInvoiceDetail().setTotalPrice(productInvoiceService.getInvoiceTotalValue(invoice.getId()));
         return invoiceService.save(invoice).getInvoiceDetail();
+//        return invoiceDetailsRepository.save(invoiceDetails);
 
     }
 

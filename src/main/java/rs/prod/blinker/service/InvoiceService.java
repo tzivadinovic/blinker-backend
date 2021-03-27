@@ -24,4 +24,6 @@ public interface InvoiceService {
 
     void updateTotalPrice();
 
+    void updateNetWeight();
+
 }

@@ -3,13 +3,11 @@ package rs.prod.blinker.service.impl;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rs.prod.blinker.entity.Invoice;
 import rs.prod.blinker.repository.InvoiceRepository;
 import rs.prod.blinker.repository.ProductInvoiceRepository;
 import rs.prod.blinker.service.InvoiceService;
-import rs.prod.blinker.service.ProductInvoiceService;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -25,6 +23,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     @Override
     public List<Invoice> findAll() {
         updateTotalPrice();
+        updateNetWeight();
         return invoiceRepository.findAll();
     }
 
@@ -75,6 +74,20 @@ public class InvoiceServiceImpl implements InvoiceService {
         for (Invoice invoice : invoices) {
             invoice.getInvoiceDetail().setTotalPrice(getInvoiceTotalValue(invoice.getId()));
             invoiceRepository.save(invoice);
+        }
+    }
+
+    @Override
+    public void updateNetWeight() {
+        List<Invoice> invoices = invoiceRepository.findAll();
+        for (Invoice invoice : invoices) {
+            if (invoice.getInvoiceDetail().getGrossWeight() == null) {
+                invoice.getInvoiceDetail().setGrossWeight(0.0);
+            } else {
+                invoice.getInvoiceDetail().setNetWeight(invoice.getInvoiceDetail().getGrossWeight() - (invoice.getInvoiceDetail().getTotalBoxes() * 0.5));
+                invoiceRepository.save(invoice);
+
+            }
         }
     }
 
